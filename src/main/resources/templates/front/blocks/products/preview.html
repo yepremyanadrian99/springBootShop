@@ -1,0 +1,72 @@
+<html layout:decorate="~{front/home/index}" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:include="front/blocks/header :: header">
+
+</head>
+<body>
+<header th:include="front/common/header :: header(${languages})">
+
+</header>
+
+<div layout:fragment="content">
+<!--TODO-->
+    <div class="w3-content w3-display-container" style="max-width:200px;margin:0 auto">
+
+        <img th:each="image : ${product.images}" class="mySlides" th:src="@{'/images/products/'+${image.url}}" style="width:100%">
+
+
+        <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+        <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+        <br>
+        <br>
+        <br>
+        <table>
+            <thead>
+            <tr>
+                <td>price</td>
+                <td>name</td>
+                <td>desc</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="${product.price}" style="padding: 10px">price</td>
+                <td th:text="${product.productDescription[0].name}" style="padding: 10px">name</td>
+                <td th:text="${product.productDescription[0].description}" style="padding: 10px;">name</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<th:block th:replace="front/common/footer :: footer"></th:block>
+<!-- jQuery Plugins -->
+<script th:src="@{http://localhost:8080/eshop/js/jquery.min.js}"></script>
+<script th:src="@{http://localhost:8080/eshop/js/bootstrap.min.js}"></script>
+<script th:src="@{http://localhost:8080/eshop/js/slick.min.js}"></script>
+<script th:src="@{http://localhost:8080/eshop/js/nouislider.min.js}"></script>
+<script th:src="@{http://localhost:8080/eshop/js/jquery.zoom.min.js}"></script>
+<script th:src="@{http://localhost:8080/eshop/js/main.js}"></script>
+
+<script>
+    var slideIndex = 1;
+    showDivs(slideIndex);
+
+    function plusDivs(n) {
+        showDivs(slideIndex += n);
+    }
+
+    function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        if (n > x.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = x.length}
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        x[slideIndex-1].style.display = "block";
+    }
+</script>
+</body>
+
+</html>

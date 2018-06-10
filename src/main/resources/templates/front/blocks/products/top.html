@@ -1,0 +1,107 @@
+<html layout:decorate="~{front/home/index}" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="front/blocks/header :: header">
+
+</head>
+<body>
+<header th:include="front/common/header :: header(${languages})">
+
+</header>
+
+<div th:fragment="topproducts(products)">
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <!-- ASIDE -->
+
+                <div id="main" class="col-md-9 ssdfsdfsdfsdf" style="float: right">
+                    <!-- /store top filter -->
+
+                    <!-- STORE -->
+                    <div id="store">
+                        <!-- row -->
+                        <div class="row">
+                            <th:block th:each="product : ${products}">
+                                <div class="col-md-4 col-sm-6 col-xs-6">
+                                    <div class="product product-single">
+                                        <a th:href="@{'/product/view/'+${product.id}}">
+                                            <div class="product-thumb" >
+                                                <div class="product-label">
+                                                    <span class="sale">-20%</span>
+                                                </div>
+                                                <!--<button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</button>-->
+
+                                                <img th:src="@{'/images/products/'+${product.images[0].url}}" style="max-height: 300px">
+                                            </div>
+                                            <div class="product-body">
+                                                <h3 class="product-price" th:text="${'$'+product.price}">$32.50 <del class="product-old-price">$45.00</del></h3>
+                                                <h2 class="product-name"><a href="#" th:text="ssdfs">Product Name Goes Here</a></h2>
+
+                                            </div>
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </th:block>
+
+                        </div>
+                        <!-- /row -->
+                    </div>
+                    <!-- /STORE -->
+
+                    <!-- /store bottom filter -->
+                </div>
+                <!-- /MAIN -->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+</div>
+<th:block th:replace="front/common/footer :: footer"></th:block>
+<!-- jQuery Plugins -->
+<script th:src="@{http://localhost:8080/eshop/js/jquery.min.js}"></script>
+<script th:src="@{http://localhost:8080/eshop/js/bootstrap.min.js}"></script>
+<script th:src="@{http://localhost:8080/eshop/js/slick.min.js}"></script>
+<script th:src="@{http://localhost:8080/eshop/js/nouislider.min.js}"></script>
+<script th:src="@{http://localhost:8080/eshop/js/jquery.zoom.min.js}"></script>
+<script th:src="@{http://localhost:8080/eshop/js/main.js}"></script>
+</body>
+<style>
+  .categories > ul{
+    display: block !important;
+  }
+</style>
+<script>
+  $(".recoursive").hover(function () {
+    $(this).find(">ul").css("display","block");
+  },function () {
+      $(this).find(">ul").css("display","block");
+  });
+  $(".search-categories").change(function () {
+    $("#search_form").attr("action","/category/"+$(this).val());
+      console.log(3);
+  });
+
+  var vatiants = []
+  $(".apply_filters").click(function (e) {
+      e.preventDefault();
+      var checkeds = $('.product_variant:checkbox:checked');
+      $.each(checkeds,function (index,value) {
+        // console.log(index,value,$(this).val());
+          vatiants.push($(this).val());
+
+      });
+      vatiants= vatiants.join(",");
+      var cat_id = $(".search-categories").find(":selected").val();
+
+      console.log(vatiants,cat_id);
+
+      window.location.href="/category/"+cat_id+"?features="+vatiants;
+      vatiants = [];
+  });
+</script>
+</html>

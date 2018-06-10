@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Feature</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div id="navbar" class="collapse navbar-collapse">
+            <li><a href="../home">HOME</a></li>
+        </div>
+    </div>
+</nav>
+
+<div>
+    <p th:text="${message}"></p>
+    Add Feature
+    <form method="post">
+        <p><input type="text" name="name" placeholder="Category name"/></p>
+        <p><input type="number" name="parentId" placeholder="Category parent id"/></p>
+        <p><input type="text" name="description" placeholder="Category description"/></p>
+        <p><input type="number" name="langId" placeholder="Language id"/></p>
+        <p><input type="number" name="status" placeholder="Status"/></p>
+        <p><input type="number" name="position" placeholder="Position"/></p>
+        <p><input type="submit"/></p>
+    </form>
+</div>
+
+<div>
+    <p>List of Categories</p>
+    <p>Id | Name</p>
+</div>
+
+<div th:each="category : ${categories}">
+    <span th:text="${category.getId()}"></span>
+    <span th:text="${category.getName()}"></span>
+</div>
+
+</body>
+
+</html>

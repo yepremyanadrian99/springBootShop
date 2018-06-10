@@ -1,0 +1,45 @@
+<html layout:decorate="~{front/home/index}" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:include="front/blocks/header :: header">
+
+</head>
+<body>
+<header th:include="front/common/header :: header(${languages})">
+
+</header>
+
+<div layout:fragment="content">
+<!--TODO-->
+    <form th:action="@{/product/create}" th:method="POST" th:object="${product}" enctype="multipart/form-data">
+        <th:block th:each="feature : ${featureVariants}" >
+            <div>
+                <label th:text="${feature.value.name}"></label>
+                <select th:name="'productVariantRels['+(${feature.key}-1)+'].variantId'">
+                    <option th:value="NULL" th:text="Select"></option>
+                    <option th:each="option : ${feature.value.variantDtos}" th:text="${option.name}" th:value="${option.id}"></option>
+                </select>
+            </div>
+        </th:block>
+        <input th:value="${category_id}" type="hidden" id="categoryId" name="categoryId">
+        <input th:type="text" th:field="*{price}">
+        <input th:type="text" th:field="*{productDescription[0].name}">
+        <input th:type="text" th:field="*{productDescription[0].description}">
+        <input th:type="file" name="files">
+        <input th:type="file" name="files">
+        <input th:type="file" name="files">
+        <input th:type="file" name="files">
+        <input th:type="SUBMIT" th:value="Create">
+    </form>
+
+</div>
+<th:block th:replace="front/common/footer :: footer"></th:block>
+<!-- jQuery Plugins -->
+<script th:src="@{http://localhost:8080/eshop/js/jquery.min.js}"></script>
+<script th:src="@{http://localhost:8080/eshop/js/bootstrap.min.js}"></script>
+<script th:src="@{http://localhost:8080/eshop/js/slick.min.js}"></script>
+<script th:src="@{http://localhost:8080/eshop/js/nouislider.min.js}"></script>
+<script th:src="@{http://localhost:8080/eshop/js/jquery.zoom.min.js}"></script>
+<script th:src="@{http://localhost:8080/eshop/js/main.js}"></script>
+</body>
+
+</html>

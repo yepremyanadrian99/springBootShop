@@ -1,0 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<div>
+    <c:forEach begin="1" end="${pages}" varStatus="loop">
+        <a href="/category/1/${loop.index}">${loop.index}</a>
+    </c:forEach>
+</div>

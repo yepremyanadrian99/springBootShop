@@ -1,0 +1,17 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+<c:forEach items="${products}" var="product">
+    <p>${product.id}----${product.name} ------ ${product.price}</p>
+</c:forEach>
+
+<jsp:include page="components/pagination.jsp">
+    <jsp:param name="pages" value="${pages}"/>
+</jsp:include>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<ul th:fragment="recursion(categories)" style="width: 200px;margin-left: 200px;position: relative;display: none">
+    <th:block th:each="category : ${categories}">
+        <li class="recoursive" style="cursor: pointer">
+            <a th:text="${category.name}" th:href="@{'/product/add/'+${category.id}}"></a>
+            <th:block  th:replace="front/blocks/categories/recursive :: recursion(${category.subcategories})"></th:block>
+        </li>
+
+    </th:block>
+
+</ul>
+
+</html>

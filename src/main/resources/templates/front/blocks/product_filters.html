@@ -1,0 +1,23 @@
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="col-md-3" id="aside" th:fragment="product_filters(filters)">
+    <form th:with="features=${#httpServletRequest.getParameter('features')}">
+        <th:block th:each="filter :${filters}">
+            <!-- aside widget -->
+            <div class="aside product_filters">
+                <h3 class="aside-title" th:text="${filter.value.name}">Filter by Brand</h3>
+                <ul class="list-links">
+                    <li th:each="variant : ${filter.value.variantDtos}">
+                        <label th:text="${variant.name}"></label>
+                        <input class="product_variant" type="checkbox" th:value="${variant.id}"/>
+                    </li>
+                </ul>
+            </div>
+        </th:block>
+        <input type="submit" value="Submit" class="apply_filters">
+    </form>
+
+</div>
+</body>
+</html>

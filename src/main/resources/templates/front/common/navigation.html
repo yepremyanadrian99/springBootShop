@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div id="navigation" th:fragment="navigation(categories)">
+    <!-- container -->
+    <div class="container">
+        <div id="responsive-nav">
+            <!-- category nav -->
+            <div class="category-nav">
+                <span class="category-header">Categories <i class="fa fa-list"></i></span>
+                <ul class="category-list">
+                    <th:block th:each="category :${categories}">
+                        <li class="dropdown side-dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" th:text="${category.name}"><i class="fa fa-angle-right"></i></a>
+                            <div class="custom-menu" th:if="${category.subcategories.size()>0}">
+                                <div class="row">
+                                    <div class="col-md-4" th:each="sub1 : ${category.subcategories}">
+                                        <ul class="list-links">
+                                            <li>
+                                                <a th:href="@{'/category/'+${sub1.id}}"><h3 class="list-links-title" th:text="${sub1.name}"></h3></a>
+                                            </li>
+                                            <li th:each="sub2 : ${sub1.subcategories}">
+                                                <a th:href="@{'/category/'+${sub2.id}}" th:text="${sub2.name}"></a>
+                                            </li>
+
+                                        </ul>
+                                        <hr>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </th:block>
+                </ul>
+            </div>
+            <!-- /category nav -->
+        </div>
+    </div>
+    <!-- /container -->
+</div>
+</html>

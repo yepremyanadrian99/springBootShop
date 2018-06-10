@@ -1,0 +1,39 @@
+<html layout:decorate="~{front/home/index}" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:include="front/blocks/header :: header">
+
+</head>
+<body>
+<header th:include="front/common/header :: header(${languages})">
+
+</header>
+
+<div layout:fragment="content">
+  <div class="categories">
+    <th:block th:replace="front/blocks/categories/recursive :: recursion(${categories})"></th:block>
+  </div>
+
+
+</div>
+<th:block th:replace="front/common/footer :: footer"></th:block>
+<!-- jQuery Plugins -->
+<script th:src="@{http://localhost:8080/eshop/js/jquery.min.js}"></script>
+<script th:src="@{http://localhost:8080/eshop/js/bootstrap.min.js}"></script>
+<script th:src="@{http://localhost:8080/eshop/js/slick.min.js}"></script>
+<script th:src="@{http://localhost:8080/eshop/js/nouislider.min.js}"></script>
+<script th:src="@{http://localhost:8080/eshop/js/jquery.zoom.min.js}"></script>
+<script th:src="@{http://localhost:8080/eshop/js/main.js}"></script>
+</body>
+<style>
+  .categories > ul{
+    display: block !important;
+  }
+</style>
+<script>
+  $(".recoursive").hover(function () {
+    $(this).find(">ul").css("display","block");
+  },function () {
+      $(this).find(">ul").css("display","block");
+  });
+</script>
+</html>
